@@ -115,3 +115,6 @@ egress/worker/deps
 local-storage
 
 env.js
+/react-chat/.env
+/server/yarn.lock
+/.DS_Store
