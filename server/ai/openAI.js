@@ -1,26 +1,14 @@
-const OpenAI = require("openai");
+const axios = require('axios');
 require("dotenv").config();
 
-let openAI;
-if (process.env.OPENAI_API_KEY) {
-  openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-}
 
-async function* startStreaming(prompt) {
-  if (!openai) {
-    throw new Error("Please provide OPENAI_API_KEY env variable");
-  }
-
-  const runner = await openai.beta.chat.completions.stream({
-    model: "gpt-3.5-turbo",
-    messages: [{ role: "user", content: prompt }],
-  });
-
-  for await (const chunk of runner) {
-    yield chunk.choices[0].delta.content || "";
-  }
+async function startStreaming(prompt) {
+    const url = encodeURI(`http://localhost:8787/?text=${prompt}`)
+    console.log(url);
+    const response = await axios.get(url);
+    return response.data;
 }
 
 module.exports = {
-  startStreaming,
+    startStreaming,
 };
