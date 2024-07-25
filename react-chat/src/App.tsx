@@ -13,13 +13,15 @@ import {
 import {useCreateChatClient} from "./hooks/useCreateChatClient";
 import {StreamedMessage} from "./components/StreamedMessage";
 import "stream-chat-react/dist/css/v2/index.css";
-import env from "react-dotenv";
+import dotenv from 'react-dotenv';
 
-const apiKey = env.STREAM_API_KEY!;
-const userId = env.USER_ID!;
-const userName = env.USER_NAME!;
-const token = env.USER_TOKEN!;
 
+const apiKey = dotenv.REACT_APP_STREAM_API_KEY!;
+const userId = dotenv.REACT_APP_USER_ID!;
+const userName = dotenv.REACT_APP_USER_NAME!;
+const token = dotenv.REACT_APP_USER_TOKEN!;
+
+console.log(`ENV ${apiKey}`)
 
 const App = () => {
     const [channel, setChannel] = useState<StreamChannel>();
@@ -43,7 +45,7 @@ const App = () => {
         if (!client) return;
 
         const newChannel = client.channel("messaging", {
-            members: [user.id, "nash_stream"],
+            members: [user.id, "chat-ai-assistant"],
         });
         setChannel(newChannel);
     }, [client, user.id]);
