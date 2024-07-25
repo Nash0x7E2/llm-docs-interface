@@ -118,3 +118,5 @@ env.js
 /react-chat/.env
 /server/yarn.lock
 /.DS_Store
+/react-chat/package-lock.json
+/server/package-lock.json
