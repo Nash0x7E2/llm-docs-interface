@@ -6,16 +6,13 @@ const {startAiBotStreaming} = require("./ai");
 
 const app = express();
 const port = 3000;
-app.use(express.raw({type: "application/json"})); // <-- parses all bodies as a Buffer
+app.use(express.raw({type: "application/json"}));
 
 const apiKey =  process.env.STREAM_API_KEY;
-const STREAM_API_SECRET = process.env.STREAM_API_KEY;
-
+const STREAM_API_SECRET = process.env.STREAM_API_SECRET;
 
 const reqHandler = async (req, res) => {
     const client = StreamChat.getInstance(apiKey, STREAM_API_SECRET);
-
-
     // parse the request budy
     const rawBody = req.body;
 
