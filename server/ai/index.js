@@ -12,7 +12,7 @@ async function startAiBotStreaming(client, channel, prompt, provider) {
     await sleep(300);
     let text = "";
 
-    const chunks = startMockStreaming();  //startOpenAIStreaming(prompt);
+    const chunks = startOpenAIStreaming(prompt);
 
     for await (const chunk of chunks) {
         await channel.sendEvent({
